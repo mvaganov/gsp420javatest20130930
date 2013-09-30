@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 public class Hello extends JPanel
 	implements MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public Hello() {}
 	public void methodThatDoesNothing(){}
 	public static void main(String[] args) {
