@@ -8,17 +8,13 @@ import javax.swing.JPanel;
 public class Hello extends JPanel
 	implements MouseListener {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	public Hello() {}
 	public void methodThatDoesNothing(){}
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
 		for (int i = 0; i < args.length; i++) {
 			System.out.println(args[i]);
 		}
+		System.out.println("!");
 		JFrame jf = new JFrame("My Frame");
 		jf.setSize(400, 400);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
