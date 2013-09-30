@@ -2,16 +2,31 @@ package gsp420;
 public class ThreadTest implements Runnable {
 	public String message = "message";
 	private int numberOfTimes = 10;
+	static boolean working = false;
+	/** jsut a global to act like a door. */
+	static Object sync = new Object();
 	public ThreadTest(String m)
 	{
 		message = m;
 	}
 	void DoTheThing()
 	{
-		for(int i = 0; i < numberOfTimes; ++i)
+//		// really crappy semaphore
+//		while(working) {
+//			try{Thread.sleep(1);}
+//			catch(Exception e){}
+//		}
+//		working = true;
+		synchronized(sync)
 		{
-			System.out.println(i+" "+message);
+			// embarassingly parellel
+			for(int i = 0; i < numberOfTimes; ++i)
+			{
+				System.out.print(message);
+			}
+			System.out.println();
 		}
+//		working = false;
 	}
 	public void run(){DoTheThing();}
 	public static void main(String[] args)
@@ -25,10 +40,26 @@ public class ThreadTest implements Runnable {
 			tests[i] = new ThreadTest(
 					""+(char)('a'+i));
 		}
+		abstract class temp implements Runnable{
+			ThreadTest t;
+			public temp(ThreadTest t)
+			{
+				this.t = t;
+			}
+		}
 		// wrap tests with a thread
 		for(int i = 0; i < count; ++i)
 		{
-			threads[i] = new Thread(tests[i]);
+			// "normal" way to thread
+//			threads[i] = new Thread(tests[i]);
+			// more functional programming style
+			threads[i] = new Thread(
+				new temp(tests[i]){
+					public void run(){
+						t.DoTheThing();
+					}
+				}
+			);
 		}
 		// start the threads
 		for(int i = 0; i < count; ++i)
