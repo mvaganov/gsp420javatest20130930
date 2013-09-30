@@ -1,6 +1,5 @@
 package gsp420;
-
-public class ThreadTest {
+public class ThreadTest implements Runnable {
 	public String message = "message";
 	private int numberOfTimes = 10;
 	public ThreadTest(String m)
@@ -14,11 +13,12 @@ public class ThreadTest {
 			System.out.println(i+" "+message);
 		}
 	}
+	public void run(){DoTheThing();}
 	public static void main(String[] args)
 	{
-		ThreadTest t = new ThreadTest("a");
-		ThreadTest t2 = new ThreadTest("b");
-		t.DoTheThing();
-		t2.DoTheThing();
+		Thread t = new Thread(new ThreadTest("a"));
+		Thread t2 = new Thread(new ThreadTest("b"));
+		t.start();
+		t2.start();
 	}
 }
