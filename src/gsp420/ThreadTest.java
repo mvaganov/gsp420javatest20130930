@@ -16,9 +16,24 @@ public class ThreadTest implements Runnable {
 	public void run(){DoTheThing();}
 	public static void main(String[] args)
 	{
-		Thread t = new Thread(new ThreadTest("a"));
-		Thread t2 = new Thread(new ThreadTest("b"));
-		t.start();
-		t2.start();
+		final int count = 10;
+		Thread[] threads = new Thread[count];
+		ThreadTest[] tests = new ThreadTest[count];
+		// create tests
+		for(int i = 0; i < count; ++i)
+		{
+			tests[i] = new ThreadTest(
+					""+(char)('a'+i));
+		}
+		// wrap tests with a thread
+		for(int i = 0; i < count; ++i)
+		{
+			threads[i] = new Thread(tests[i]);
+		}
+		// start the threads
+		for(int i = 0; i < count; ++i)
+		{
+			threads[i].start();
+		}
 	}
 }
