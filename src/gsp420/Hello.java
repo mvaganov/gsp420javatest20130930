@@ -1,5 +1,6 @@
 package gsp420;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;	// newer stuff is JavaFX
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -13,6 +14,10 @@ public class Hello extends JPanel
 
 	// minecraft uses the LWJGL, which is pretty good.
 	Image img;
+	
+	Font f = 
+		new Font("Courier New", 
+				Font.BOLD|Font.ITALIC, 20);
 	
 	public Hello() {}
 	public void methodThatDoesNothing(){}
@@ -32,6 +37,7 @@ public class Hello extends JPanel
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.setFont(f);
 		g.drawString(m_message, 
 				(int)click.x, (int)click.y);
 		g.setColor(Color.red);
