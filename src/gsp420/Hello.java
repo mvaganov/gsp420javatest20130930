@@ -1,13 +1,19 @@
 package gsp420;
 import java.awt.Color;
 import java.awt.Graphics;	// newer stuff is JavaFX
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 public class Hello extends JPanel
 	implements MouseListener {
 
+	// minecraft uses the LWJGL, which is pretty good.
+	Image img;
+	
 	public Hello() {}
 	public void methodThatDoesNothing(){}
 	public static void main(String[] args) {
@@ -30,10 +36,14 @@ public class Hello extends JPanel
 				(int)click.x, (int)click.y);
 		g.setColor(Color.red);
 		g.drawLine(5, 10, (int)click.x, (int)click.y);
+		g.drawImage(img, (int)click.x, (int)click.y, 
+				null);
 	}
 	public Hello(String m) {
 		m_message = m;
 		addMouseListener(this);
+		img = Toolkit.getDefaultToolkit().
+				createImage("dwarf.png");
 	}
 	/** a very simple 2D vector class */
 	class Vec2
