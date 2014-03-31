@@ -72,16 +72,21 @@ public class ThreadTest implements Runnable {
 					this.t = t;
 				}
 			}
+			// create tests
+			for(int i = 0; i < count; ++i) {
+				tests[i] = new ThreadTest(""+(char)('a'+i));
+			}
+			temp[] temps = new temp[count];
 			// wrap tests with a thread
 			for(int i = 0; i < count; ++i) {
 				// more functional programming style
-				threads[i] = new Thread(
-					new temp(tests[i]){
-						public void run(){
-							t.DoTheThing();
-						}
+				temps[i] = new temp(tests[i]) {
+					public void run() {
+						t.DoTheThing();
 					}
-				);
+				};
+				// put the temporary anonymous classes into a thread
+				threads[i] = new Thread(temps[i]);
 			}
 			// start the threads
 			for(int i = 0; i < count; ++i) {
