@@ -47,7 +47,7 @@ public class ThreadTest implements Runnable {
 	
 	public static void main(String[] args) {
 		final int count = 10;
-		final boolean usingFunctionalExample = false;
+		final boolean usingFunctionalExample = true;
 		Thread[] threads = new Thread[count];
 		ThreadTest[] tests = new ThreadTest[count];
 
@@ -73,10 +73,7 @@ public class ThreadTest implements Runnable {
 				}
 			}
 			// wrap tests with a thread
-			for(int i = 0; i < count; ++i)
-			{
-				// "normal" way to thread
-				threads[i] = new Thread(tests[i]);
+			for(int i = 0; i < count; ++i) {
 				// more functional programming style
 				threads[i] = new Thread(
 					new temp(tests[i]){
@@ -87,8 +84,7 @@ public class ThreadTest implements Runnable {
 				);
 			}
 			// start the threads
-			for(int i = 0; i < count; ++i)
-			{
+			for(int i = 0; i < count; ++i) {
 				threads[i].start();
 			}
 		}
