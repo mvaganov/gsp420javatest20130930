@@ -11,8 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 public class Hello extends JPanel
 	implements MouseListener {
+	private static final long serialVersionUID = 1L;
 
-	// minecraft uses the LWJGL, which is pretty good.
+	// minecraft uses the LWJGL, which is pretty good at handling images
 	Image img;
 	
 	Font f = 
