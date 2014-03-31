@@ -79,13 +79,13 @@ public class ThreadTest implements Runnable {
 			temp[] temps = new temp[count];
 			// wrap tests with a thread
 			for(int i = 0; i < count; ++i) {
-				// more functional programming style
+				// more functional programming style --create an anonymous class
 				temps[i] = new temp(tests[i]) {
 					public void run() {
 						t.DoTheThing();
 					}
 				};
-				// put the temporary anonymous classes into a thread
+				// put the temporary anonymous class into a thread
 				threads[i] = new Thread(temps[i]);
 			}
 			// start the threads
